@@ -18,35 +18,49 @@ CREATE TABLE `admins` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Lecturers
+
+-- Lecturers table (database-driven)
 CREATE TABLE `lecturers` (
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-	`name` VARCHAR(255) NOT NULL,
-	`title` VARCHAR(255),
-	`bio` TEXT,
-	`photo_path` VARCHAR(255),
+	`title` VARCHAR(255) NOT NULL,
+	`description` TEXT,
+	`image` VARCHAR(255),
+	`date` DATE DEFAULT NULL,
 	`created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	`updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Publications
+
+-- Publications table
 CREATE TABLE `publications` (
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`title` VARCHAR(500) NOT NULL,
+	`authors` VARCHAR(1000),
+	`journal` VARCHAR(500),
+	`year` SMALLINT,
 	`abstract` TEXT,
-	`file_path` VARCHAR(255),
-	`published_at` DATE,
+	`doi` VARCHAR(255),
+	`publication_url` VARCHAR(1000),
+	`pdf_file` VARCHAR(255),
+	`image` VARCHAR(255),
 	`created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	`updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Consultancy entries
-CREATE TABLE `consultancy` (
+
+-- Consultancy videos table
+CREATE TABLE `consultancy_videos` (
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`title` VARCHAR(255) NOT NULL,
 	`description` TEXT,
-	`file_path` VARCHAR(255),
-	`dates` VARCHAR(255),
+	`youtube_url` VARCHAR(1000),
+	`thumbnail` VARCHAR(255),
+	`date` DATE DEFAULT NULL,
 	`created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	`updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

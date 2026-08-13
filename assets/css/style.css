@@ -105,4 +105,18 @@ body{margin:0;font-family: 'Poppins', system-ui, -apple-system, sans-serif;backg
 	.vision-mission .grid{grid-template-columns:1fr}
 }
 
+/* Publications / Lecturer / Videos list styles */
+.lecturer-item, .publication-item, .video-item{display:grid;grid-template-columns:140px 1fr;gap:18px;align-items:start;padding:18px;border-radius:10px;margin-bottom:16px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));}
+.lecturer-media img, .placeholder-img{width:140px;height:140px;object-fit:cover;border-radius:8px;border:1px solid rgba(255,255,255,0.03)}
+.lecture-body, .lecturer-body h4{margin:0}
+.publication-item .pub-actions{margin-top:12px;display:flex;gap:10px;align-items:center}
+.video-responsive{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:12px}
+.video-responsive iframe{position:absolute;left:0;top:0;width:100%;height:100%}
+
+@media (max-width:900px){
+	.lecturer-item, .publication-item, .video-item{grid-template-columns:1fr;}
+	.lecturer-media img, .placeholder-img{width:100%;height:auto;max-height:320px;border-radius:12px}
+}
+
+
 
