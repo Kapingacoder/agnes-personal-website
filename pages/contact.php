@@ -85,4 +85,3 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 </main>
 
 <?php require_once __DIR__ . '/../includes/footer.php';
-<?php require_once __DIR__ . '/../includes/footer.php';
