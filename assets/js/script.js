@@ -28,10 +28,22 @@ document.addEventListener('DOMContentLoaded', function(){
   var adminStar = document.getElementById('adminStar');
   if(adminStar){
     adminStar.addEventListener('click', function(){
-      // No visible text. This can be used to open admin login by devs.
-      console.log('admin star clicked');
+      var modal = document.getElementById('adminModal');
+      if(modal){
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden','false');
+        // focus username
+        var u = modal.querySelector('input[name="username"]'); if(u) u.focus();
+      }
     });
   }
+  var adminModal = document.getElementById('adminModal');
+  var adminModalClose = document.getElementById('adminModalClose');
+  if(adminModalClose) adminModalClose.addEventListener('click', function(){
+    adminModal.classList.remove('open');
+    adminModal.setAttribute('aria-hidden','true');
+  });
+
   // See More / See Less reusable component
   function setupExpandables(){
     var expandables = document.querySelectorAll('.expandable');
