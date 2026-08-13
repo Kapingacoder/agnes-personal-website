@@ -9,27 +9,25 @@ if(is_logged_in()){
     exit;
 }
 
+error_reporting(E_ALL);
 $error = '';
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
-    $username = trim((string)($_POST['username'] ?? ''));
-    $password = (string)($_POST['password'] ?? '');
-
-  // verify CSRF token
+  $username = trim((string)($_POST['username'] ?? ''));
+  $password = (string)($_POST['password'] ?? '');
   $token = $_POST['_csrf'] ?? '';
+
   if(!verify_csrf($token)){
     $error = 'Invalid request.';
+  } elseif($username === '' || $password === ''){
+    $error = 'Missing username or password.';
   } else {
-
-    if($username === '' || $password === ''){
-        $error = 'Missing username or password.';
+    if(login_user($username, $password)){
+      header('Location: /admin/dashboard.php');
+      exit;
     } else {
-        if(login_user($username, $password)){
-            header('Location: /admin/dashboard.php');
-            exit;
-        } else {
-            $error = 'Invalid credentials.';
-        }
+      $error = 'Invalid credentials.';
     }
+  }
 }
 
 // Present a standalone login page (also used by modal form)
@@ -63,18 +61,4 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
   </div>
 </body>
 </html>
-<?php
-// Simple login placeholder
-?>
-<!doctype html>
-<html>
-<head><meta charset="utf-8"><title>Admin Login</title></head>
-<body>
-<h1>Admin Login</h1>
-<form method="post" action="dashboard.php">
-  <label>Username: <input name="user"></label>
-  <label>Password: <input type="password" name="pass"></label>
-  <button type="submit">Login</button>
-</form>
-</body>
-</html>
+

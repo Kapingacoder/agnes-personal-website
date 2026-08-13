@@ -17,7 +17,4 @@ header('Expires: 0');
 // Redirect to public home
 header('Location: /');
 exit;
-<?php
-// Simple logout placeholder
-header('Location: ../index.php');
-exit;
+
