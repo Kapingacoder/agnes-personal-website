@@ -42,7 +42,22 @@ document.addEventListener('DOMContentLoaded', function(){
   if(adminModalClose) adminModalClose.addEventListener('click', function(){
     adminModal.classList.remove('open');
     adminModal.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
   });
+
+  // Close admin modal when clicking outside panel
+  if(adminModal){
+    adminModal.addEventListener('click', function(e){
+      if(e.target === adminModal){
+        adminModal.classList.remove('open');
+        adminModal.setAttribute('aria-hidden','true');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+
+  // Close admin modal on Escape
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && adminModal && adminModal.classList.contains('open')){ adminModal.classList.remove('open'); adminModal.setAttribute('aria-hidden','true'); document.body.style.overflow = ''; } });
 
   // See More / See Less reusable component
   function setupExpandables(){

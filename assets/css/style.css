@@ -118,5 +118,74 @@ body{margin:0;font-family: 'Poppins', system-ui, -apple-system, sans-serif;backg
 	.lecturer-media img, .placeholder-img{width:100%;height:auto;max-height:320px;border-radius:12px}
 }
 
+/* Global responsive fixes */
+img, video, picture {max-width:100%;height:auto;display:block}
+img {max-width:100%;height:auto}
+
+/* Ensure circular profile stays circular but responsive */
+.hero-image img{width:100%;max-width:360px;height:auto;border-radius:50%;}
+
+/* Mobile panel should use viewport-relative width to avoid overflow on narrow devices */
+.mobile-panel{width: min(320px, 85vw);left:auto;right:0}
+
+/* Prevent accidental horizontal overflow */
+html,body{overflow-x:hidden}
+
+/* Make hero actions wrap on small screens */
+.hero-actions{flex-wrap:wrap}
+
+/* Tables: make responsive on small screens */
+.table-responsive{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.table-responsive table{width:100%;border-collapse:collapse}
+.table-responsive th,.table-responsive td{padding:8px;border-bottom:1px solid rgba(255,255,255,0.03);text-align:left}
+
+/* Admin modal */
+.admin-modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);opacity:0;pointer-events:none;transition:opacity .2s ease;z-index:60}
+.admin-modal.open{opacity:1;pointer-events:auto}
+.admin-modal-panel{background:var(--bg-secondary);padding:20px;border-radius:12px;min-width:280px;width:clamp(280px, 90vw, 420px);box-shadow:0 10px 30px rgba(0,0,0,0.6)}
+.admin-modal-panel h3{margin-top:0;color:var(--white)}
+.admin-modal-panel label{display:block;color:var(--text-secondary);margin-bottom:8px}
+.admin-modal-panel input{width:100%;padding:10px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text-primary)}
+.admin-modal-close{position:absolute;top:8px;right:8px;background:transparent;border:0;color:var(--text-primary);font-size:18px}
+
+/* Breakpoints for common device widths */
+@media (max-width: 414px){
+	.header-inner{padding:12px 0}
+	.brand-name{font-size:16px}
+	.hero{padding:36px 0}
+}
+
+@media (min-width: 768px){
+	:root{--container:900px}
+	.hero-image img{max-width:280px}
+	.hero-name{font-size:44px}
+}
+
+@media (min-width: 1024px){
+	:root{--container:1100px}
+	.hero-inner{gap:60px}
+	.hero-image{flex:0 0 420px}
+	.hero-image img{max-width:420px}
+	.hero-name{font-size:56px}
+}
+
+@media (min-width: 1280px){
+	:root{--container:1300px}
+	.hero-content{max-width:820px}
+}
+
+@media (min-width: 1440px){
+	:root{--container:1500px}
+}
+
+@media (min-width: 1920px){
+	:root{--container:1700px}
+	.hero-content{max-width:1000px}
+}
+
+/* Desktop tweak: avoid stretching very wide content */
+.container{max-width:var(--container)}
+
+
 
 
