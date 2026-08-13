@@ -79,3 +79,30 @@ body{margin:0;font-family: 'Poppins', system-ui, -apple-system, sans-serif;backg
 	.hero-intro{font-size:14px}
 }
 
+/* Resume page styles */
+.page-header{padding:28px 0 12px}
+.section-title{font-size:28px;color:var(--white);margin:0}
+.section-sub{color:var(--text-secondary);margin-top:6px}
+.section{padding:20px 0;border-top:1px solid rgba(255,255,255,0.02)}
+.section h3{margin:0 0 12px;color:var(--white)}
+
+.expandable{overflow:hidden;transition:max-height .35s ease;padding-right:6px}
+.expandable p{color:var(--text-secondary);margin:0 0 12px}
+.expandable.collapsed{max-height:6.6rem}
+.expandable.expanded{max-height:2000px}
+
+.see-more-toggle{margin-top:6px}
+
+.edu-list{list-style:none;padding:0;margin:0;display:grid;gap:18px}
+.edu-list li{color:var(--text-secondary);background:transparent;padding:12px;border-radius:10px}
+
+.vision-mission .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.vision-mission h4{color:var(--accent);margin-bottom:8px}
+.values-list{display:flex;flex-wrap:wrap;gap:12px;padding:0;margin:0;list-style:none}
+.values-list li{background:transparent;padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);color:var(--text-primary)}
+
+@media (max-width:900px){
+	.vision-mission .grid{grid-template-columns:1fr}
+}
+
+

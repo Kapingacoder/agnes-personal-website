@@ -32,4 +32,28 @@ document.addEventListener('DOMContentLoaded', function(){
       console.log('admin star clicked');
     });
   }
+  // See More / See Less reusable component
+  function setupExpandables(){
+    var expandables = document.querySelectorAll('.expandable');
+    expandables.forEach(function(el){
+      var collapsedLines = parseInt(el.getAttribute('data-collapsed-lines') || '4',10);
+      // approximate line-height 1.1em, font-size ~16 -> use rem-based clamp
+      if(!el.classList.contains('expanded') && !el.classList.contains('collapsed')){
+        el.classList.add('collapsed');
+      }
+    });
+
+    var toggles = document.querySelectorAll('.see-more-toggle');
+    toggles.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var target = btn.previousElementSibling;
+        if(!target) return;
+        var expanded = target.classList.toggle('expanded');
+        target.classList.toggle('collapsed', !expanded);
+        btn.textContent = expanded ? 'See Less' : 'See More';
+        btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      });
+    });
+  }
+  setupExpandables();
 });
