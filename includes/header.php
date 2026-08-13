@@ -7,6 +7,8 @@ if(!headers_sent()){
   // Content-Security-Policy: allow self, https, Google Fonts and YouTube embeds
   header("Content-Security-Policy: default-src 'self' https:; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com; connect-src 'self' https:;");
 }
+// Ensure template helpers are available early (esc(), csrf helpers, etc.)
+@include_once __DIR__ . '/helpers.php';
 ?>
 <!doctype html>
 <html lang="en">
