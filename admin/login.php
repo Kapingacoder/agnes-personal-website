@@ -14,6 +14,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $username = trim((string)($_POST['username'] ?? ''));
     $password = (string)($_POST['password'] ?? '');
 
+  // verify CSRF token
+  $token = $_POST['_csrf'] ?? '';
+  if(!verify_csrf($token)){
+    $error = 'Invalid request.';
+  } else {
+
     if($username === '' || $password === ''){
         $error = 'Missing username or password.';
     } else {

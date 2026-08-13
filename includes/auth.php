@@ -1,6 +1,19 @@
 <?php
 // Authentication helpers using PHP sessions and the `admins` table.
-session_start();
+// Harden session cookie settings before starting session
+if(session_status() !== PHP_SESSION_ACTIVE){
+  $secure = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || (isset($_SERVER['SERVER_PORT']) && (int)$_SERVER['SERVER_PORT'] === 443);
+  $cookieParams = session_get_cookie_params();
+  session_set_cookie_params([
+    'lifetime' => $cookieParams['lifetime'] ?? 0,
+    'path' => $cookieParams['path'] ?? '/',
+    'domain' => $cookieParams['domain'] ?? '',
+    'secure' => $secure,
+    'httponly' => true,
+    'samesite' => 'Lax',
+  ]);
+  session_start();
+}
 
 require_once __DIR__ . '/db.php';
 
@@ -25,6 +38,8 @@ function login_user(string $username, string $password): bool {
     // Regenerate session id
     session_regenerate_id(true);
     $_SESSION['admin_user'] = ['id' => $row['id'], 'username' => $row['username']];
+    // Track last activity for session timeout (30 minutes)
+    $_SESSION['last_activity'] = time();
     return true;
   }
   return false;
@@ -39,4 +54,19 @@ function logout_user(){
     );
   }
   session_destroy();
+}
+
+// Optional check for session timeout
+function session_is_expired($timeout = 1800){
+    if(empty($_SESSION['last_activity'])) return false;
+    return (time() - $_SESSION['last_activity']) > $timeout;
+}
+
+// Extend session on each request
+if(!empty($_SESSION['admin_user'])){
+    if(session_is_expired()){
+        logout_user();
+    } else {
+        $_SESSION['last_activity'] = time();
+    }
 }

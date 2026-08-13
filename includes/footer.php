@@ -9,7 +9,9 @@
     <div class="admin-modal-panel">
       <button id="adminModalClose" class="admin-modal-close" aria-label="Close">✕</button>
       <h3>Administrator Login</h3>
+      <?php require_once __DIR__ . '/helpers.php'; ?>
       <form id="adminLoginForm" method="post" action="/admin/login.php">
+        <?php echo csrf_field(); ?>
         <label>Username
           <input name="username" type="text" autocomplete="username" required>
         </label>

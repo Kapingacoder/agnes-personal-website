@@ -37,12 +37,14 @@ $publications = $stmt->fetchAll();
                 <?php if($url = safe_url($p['publication_url'])): ?>
                   <a class="btn btn-primary" href="<?php echo esc($url); ?>" target="_blank" rel="noopener">View Publication</a>
                 <?php endif; ?>
-                <?php if(!empty($p['pdf_file'])): 
+                <?php if(!empty($p['pdf_file'])):
                     $pdfPath = $p['pdf_file'];
-                    if(file_exists(__DIR__ . '/../' . ltrim($pdfPath, '/'))){ ?>
-                      <a class="btn btn-primary" href="/<?php echo ltrim(esc($pdfPath), '/'); ?>" download>Download PDF</a>
+                    // Prefer local uploads under /uploads only
+                    if(is_safe_local_path($pdfPath)){
+                        $local = ltrim($pdfPath, '/'); ?>
+                        <a class="btn btn-primary" href="/<?php echo ltrim(esc($local), '/'); ?>" download>Download PDF</a>
                     <?php } else if(safe_url($p['pdf_file'])){ ?>
-                      <a class="btn btn-primary" href="<?php echo esc($p['pdf_file']); ?>" target="_blank" rel="noopener">Download PDF</a>
+                        <a class="btn btn-primary" href="<?php echo esc($p['pdf_file']); ?>" target="_blank" rel="noopener">Download PDF</a>
                     <?php } endif; ?>
               </div>
             </div>
