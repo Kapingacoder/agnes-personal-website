@@ -26,17 +26,21 @@ require_once __DIR__ . '/includes/navbar.php';
       </div>
 
       <div class="hero-social">
-        <a href="#" aria-label="Twitter" class="social-icon">
-          <!-- Twitter SVG -->
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 5.92c-.63.28-1.3.47-2 .56.72-.43 1.27-1.11 1.53-1.92-.67.4-1.42.7-2.22.86A3.48 3.48 0 0015.5 4c-1.92 0-3.48 1.6-3.48 3.57 0 .28.03.56.09.82-2.9-.15-5.48-1.6-7.21-3.8-.3.52-.47 1.12-.47 1.76 0 1.22.9 2.24 2.14 2.54-.53-.02-1.03-.17-1.47-.42v.04c0 1.7 1.22 3.12 2.85 3.44-.3.08-.62.12-.95.12-.23 0-.45-.02-.66-.06.45 1.44 1.77 2.5 3.32 2.53A6.98 6.98 0 012 19.54 9.86 9.86 0 006.29 21c7.55 0 11.68-6.6 11.68-12.32 0-.19 0-.37-.01-.56.8-.6 1.5-1.36 2.05-2.23-.73.33-1.5.55-2.3.65z" fill="currentColor"/></svg>
+        <a href="#" aria-label="Facebook" class="social-icon">
+          <!-- Facebook SVG -->
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 12.07C22 6.48 17.52 2 11.93 2S1.86 6.48 1.86 12.07c0 4.99 3.66 9.13 8.44 9.92v-7.02H8.08v-2.9h2.22V9.41c0-2.2 1.3-3.42 3.28-3.42.95 0 1.95.17 1.95.17v2.14h-1.1c-1.09 0-1.43.68-1.43 1.38v1.65h2.43l-.39 2.9h-2.04V22c4.78-.79 8.44-4.93 8.44-9.93z" fill="currentColor"/></svg>
         </a>
         <a href="#" aria-label="LinkedIn" class="social-icon">
           <!-- LinkedIn SVG -->
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5a2.5 2.5 0 11.02 0zM3 8.98h4v12H3v-12zM9 8.98h3.84v1.64h.05c.54-1.02 1.86-2.1 3.83-2.1 4.1 0 4.86 2.7 4.86 6.2v7.26h-4v-6.44c0-1.54-.03-3.52-2.15-3.52-2.16 0-2.49 1.68-2.49 3.41v6.55H9v-12z" fill="currentColor"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5a2.5 2.5 0 11.02 0zM3 8.98h4v12H3v-12zM9 8.98h3.84v1.64h.05c.54-1.02 1.86-2.1 3.83-2.1 4.1 0 4.86 2.7 4.86 6.2v7.26h-4v-6.44c0-1.54-.03-3.52-2.15-3.52-2.16 0-2.49 1.68-2.49 3.41v6.55H9v-12z" fill="currentColor"/></svg>
+        </a>
+        <a href="#" aria-label="Instagram" class="social-icon">
+          <!-- Instagram SVG -->
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm5 6.5A4.5 4.5 0 1016.5 13 4.5 4.5 0 0012 8.5zm6.5-3.8a1.2 1.2 0 11-1.2 1.2 1.2 1.2 0 011.2-1.2z" fill="currentColor"/></svg>
         </a>
         <a href="#" aria-label="ResearchGate" class="social-icon">
-          <!-- Globe/Research SVG -->
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 2a8 8 0 015.29 13.7A9.97 9.97 0 0112 4zM4.71 6.29A8 8 0 0112 4v16a8 8 0 01-7.29-13.71z" fill="currentColor"/></svg>
+          <!-- Research/Globe SVG -->
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 2a8 8 0 015.29 13.7A9.97 9.97 0 0112 4zM4.71 6.29A8 8 0 0112 4v16a8 8 0 01-7.29-13.71z" fill="currentColor"/></svg>
         </a>
       </div>
     </div>
