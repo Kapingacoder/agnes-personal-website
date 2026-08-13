@@ -1,0 +1,2 @@
+-- Database dump placeholder
+-- Create your tables here
