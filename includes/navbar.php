@@ -2,6 +2,7 @@
   <div class="container header-inner">
     <div class="brand">
       <a href="/index.php" class="brand-link">
+        <span class="brand-badge" aria-hidden="true">A</span>
         <span class="brand-name">Dr. Agnes Kapinga</span>
       </a>
     </div>
