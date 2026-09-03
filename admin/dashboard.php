@@ -96,6 +96,7 @@ require __DIR__ . '/../includes/admin/layout_top.php';
         <a class="quick-link" href="/admin/consultancy/index.php"><?php echo admin_icon_html('consultancy'); ?><span>Manage Consultancy</span></a>
         <a class="quick-link" href="/admin/index.php"><?php echo admin_icon_html('inbox'); ?><span>View Messages</span></a>
         <a class="quick-link" href="/admin/change-password.php"><?php echo admin_icon_html('shield'); ?><span>Change Password</span></a>
+        <a class="quick-link" href="/admin/cv.php"><?php echo admin_icon_html('external'); ?><span>Manage CV</span></a>
         <a class="quick-link" href="/index.php" target="_blank"><?php echo admin_icon_html('external'); ?><span>Open Public Site</span></a>
       </div>
     </article>

@@ -2,7 +2,22 @@
 <?php
 require_once __DIR__ . '/includes/header.php';
 require_once __DIR__ . '/includes/navbar.php';
+require_once __DIR__ . '/includes/db.php';
 require_once __DIR__ . '/includes/helpers.php';
+
+// Get admin's CV file
+$site_config = require __DIR__ . '/config/site.php';
+$cv_download_path = $site_config['fallback_cv_path']; // Default fallback
+
+try {
+    $stmt = $pdo->query('SELECT cv_file FROM admins WHERE cv_file IS NOT NULL LIMIT 1');
+    $cv_result = $stmt->fetch();
+    if ($cv_result && !empty($cv_result['cv_file'])) {
+        $cv_download_path = $cv_result['cv_file'];
+    }
+} catch (Throwable $e) {
+    // Keep fallback if database query fails
+}
 ?>
 
 <main class="hero">
@@ -22,7 +37,7 @@ require_once __DIR__ . '/includes/helpers.php';
       <p class="hero-intro">I am a Lecturer and Researcher at the Tengeru Institute of Community Development in Arusha, Tanzania. My work focuses on climate resilience, environmental governance, social justice, and sustainable livelihoods.</p>
 
       <div class="hero-actions">
-        <a class="btn btn-primary" href="/database/agnes_cv.pdf" download="Agnes-Kapinga-CV.pdf">Download CV</a>
+        <a class="btn btn-primary" href="<?php echo esc($cv_download_path); ?>" download="Agnes-Kapinga-CV.pdf">Download CV</a>
         <a class="btn btn-secondary" href="/pages/contact.php">Contact</a>
       </div>
 

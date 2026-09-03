@@ -530,6 +530,16 @@ html,body{margin:0;padding:0}
 	color:var(--muted-2);
 	line-height:1.5;
 }
+.cv-status{display:flex;flex-direction:column;gap:16px;margin-bottom:24px}
+.cv-status__current,.cv-status__missing{display:flex;gap:16px;padding:20px;border-radius:16px;background:rgba(255,255,255,0.025);border:1px solid var(--line)}
+.cv-status__current{background:rgba(52,211,153,0.08);border-color:rgba(52,211,153,0.2)}
+.cv-status__missing{background:rgba(148,163,184,0.05);border-color:rgba(148,163,184,0.15)}
+.cv-status__icon{flex-shrink:0;width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.05);border-radius:50%;color:var(--muted-2)}
+.cv-status__current .cv-status__icon{background:rgba(52,211,153,0.15);color:var(--accent-green)}
+.cv-status__content{flex:1}
+.cv-status__content h4{margin:0 0 8px 0;font-size:1.1rem;font-weight:600;color:var(--text)}
+.cv-status__content p{margin:0 0 12px 0;font-size:.9rem;color:var(--muted-2);line-height:1.5}
+.cv-status__actions{display:flex;gap:10px;flex-wrap:wrap}
 .field input[type='file']{
 	padding:10px 12px;
 	cursor:pointer;

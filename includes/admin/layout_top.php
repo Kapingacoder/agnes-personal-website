@@ -26,6 +26,7 @@ $adminNavItems = [
     'consultancy' => ['label' => 'Consultancy', 'href' => '/admin/consultancy/index.php', 'icon' => 'consultancy'],
     'messages' => ['label' => 'Messages', 'href' => '/admin/index.php', 'icon' => 'messages'],
     'settings' => ['label' => 'Settings', 'href' => '/admin/change-password.php', 'icon' => 'shield'],
+    'cv' => ['label' => 'CV Management', 'href' => '/admin/cv.php', 'icon' => 'external'],
 ];
 ?>
 <!doctype html>

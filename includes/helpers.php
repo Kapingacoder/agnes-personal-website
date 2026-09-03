@@ -118,6 +118,16 @@ function ensure_projects_table(PDO $pdo): void {
     )');
 }
 
+function ensure_admins_table(PDO $pdo): void {
+    $pdo->exec('CREATE TABLE IF NOT EXISTS admins (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(100) NOT NULL UNIQUE,
+        password_hash VARCHAR(255) NOT NULL,
+        cv_file VARCHAR(255) DEFAULT NULL,
+        created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )');
+}
+
 function safe_upload(array $file, array $opts = []){
     // opts: allowed_mimes (array), max_size (bytes)
     $allowed = $opts['allowed_mimes'] ?? ['application/pdf','image/jpeg','image/png','image/webp'];
