@@ -1,3 +1,9 @@
+<?php
+$currentPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
+if (strpos($currentPath, '/admin') === 0) {
+    return;
+}
+?>
 <header class="site-header">
   <div class="container header-inner">
     <div class="brand">
@@ -13,6 +19,7 @@
         <li><a href="/pages/resume.php">Resume</a></li>
         <li><a href="/pages/lecturer.php">Lecturer</a></li>
         <li><a href="/pages/research.php">Research &amp; Publications</a></li>
+        <li><a href="/pages/projects.php">Projects</a></li>
         <li><a href="/pages/consultancy.php">Consultancy</a></li>
         <li><a href="/pages/contact.php">Contact</a></li>
       </ul>
@@ -30,6 +37,7 @@
       <li><a href="/pages/resume.php">Resume</a></li>
       <li><a href="/pages/lecturer.php">Lecturer</a></li>
       <li><a href="/pages/research.php">Research &amp; Publications</a></li>
+      <li><a href="/pages/projects.php">Projects</a></li>
       <li><a href="/pages/consultancy.php">Consultancy</a></li>
       <li><a href="/pages/contact.php">Contact</a></li>
     </ul>

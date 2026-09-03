@@ -1,80 +1,78 @@
--- Database dump placeholder
--- Create your tables here
-
 -- MySQL schema for Agnes personal website
--- Update username/password before running on production
+-- Create database first, then run this script.
 
-DROP DATABASE IF EXISTS `agnes_personal_website`;
-CREATE DATABASE `agnes_personal_website` DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
-USE `agnes_personal_website`;
+CREATE TABLE IF NOT EXISTS admins (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
 
--- Admins / users for admin panel
-CREATE TABLE `admins` (
-	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-	`username` VARCHAR(100) NOT NULL UNIQUE,
-	`password_hash` VARCHAR(255) NOT NULL,
-	`created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE IF NOT EXISTS lecturers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    image VARCHAR(255),
+    caption TEXT,
+    date DATE DEFAULT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT NULL
+);
 
--- Lecturers
+CREATE TABLE IF NOT EXISTS publications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(500) NOT NULL,
+    authors VARCHAR(1000),
+    journal VARCHAR(500),
+    year SMALLINT,
+    abstract TEXT,
+    doi VARCHAR(255),
+    publication_url VARCHAR(1000),
+    pdf_file VARCHAR(255),
+    image VARCHAR(255),
+    caption TEXT,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT NULL
+);
 
--- Lecturers table (database-driven)
-CREATE TABLE `lecturers` (
-	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-	`title` VARCHAR(255) NOT NULL,
-	`description` TEXT,
-	`image` VARCHAR(255),
-	`date` DATE DEFAULT NULL,
-	`created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	`updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-	PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE IF NOT EXISTS projects (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(500) NOT NULL,
+    description TEXT,
+    publication_date DATE DEFAULT NULL,
+    pdf_file VARCHAR(255),
+    pdf_file_name VARCHAR(255),
+    cover_image VARCHAR(255),
+    caption TEXT,
+    allow_download BOOLEAN NOT NULL DEFAULT TRUE,
+    allow_print BOOLEAN NOT NULL DEFAULT TRUE,
+    viewer_enabled BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT NULL
+);
 
--- Publications
+CREATE TABLE IF NOT EXISTS consultancy_videos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    youtube_url VARCHAR(1000),
+    thumbnail VARCHAR(255),
+    caption TEXT,
+    date DATE DEFAULT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT NULL
+);
 
--- Publications table
-CREATE TABLE `publications` (
-	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-	`title` VARCHAR(500) NOT NULL,
-	`authors` VARCHAR(1000),
-	`journal` VARCHAR(500),
-	`year` SMALLINT,
-	`abstract` TEXT,
-	`doi` VARCHAR(255),
-	`publication_url` VARCHAR(1000),
-	`pdf_file` VARCHAR(255),
-	`image` VARCHAR(255),
-	`created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	`updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-	PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE IF NOT EXISTS contacts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
 
-
--- Consultancy videos table
-CREATE TABLE `consultancy_videos` (
-	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-	`title` VARCHAR(255) NOT NULL,
-	`description` TEXT,
-	`youtube_url` VARCHAR(1000),
-	`thumbnail` VARCHAR(255),
-	`date` DATE DEFAULT NULL,
-	`created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	`updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-	PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- Contact messages
-CREATE TABLE `contacts` (
-	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-	`name` VARCHAR(255) NOT NULL,
-	`email` VARCHAR(255) NOT NULL,
-	`message` TEXT NOT NULL,
-	`created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- Example: create a default admin (password is 'changeme' — replace with strong password)
--- Use PHP's password_hash() to generate the hash. Example in PHP: password_hash('yourpassword', PASSWORD_DEFAULT)
--- INSERT INTO `admins` (`username`, `password_hash`) VALUES ('admin', 'REPLACE_WITH_HASH');
+-- Insert default admin user
+INSERT INTO admins (username, password_hash)
+VALUES ('agnes', '$2y$12$.VZL3hR1dLN.4tARUbYN/Ofzez/a3DZBJtHCs0URZYu3ng/TJqNWW')
+ON DUPLICATE KEY UPDATE password_hash = VALUES(password_hash);
 

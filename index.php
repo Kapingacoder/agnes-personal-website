@@ -22,7 +22,7 @@ require_once __DIR__ . '/includes/helpers.php';
       <p class="hero-intro">I am a Lecturer and Researcher at the Tengeru Institute of Community Development in Arusha, Tanzania. My work focuses on climate resilience, environmental governance, social justice, and sustainable livelihoods.</p>
 
       <div class="hero-actions">
-        <a class="btn btn-primary" href="/database/agnes_cv.pdf" download>Download CV</a>
+        <a class="btn btn-primary" href="/database/agnes_cv.pdf" download="Agnes-Kapinga-CV.pdf">Download CV</a>
         <a class="btn btn-secondary" href="/pages/contact.php">Contact</a>
       </div>
 
