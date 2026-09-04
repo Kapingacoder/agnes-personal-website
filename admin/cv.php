@@ -1,8 +1,8 @@
 <?php
-require_once __DIR__ . '/../../includes/auth.php';
+require_once __DIR__ . '/../includes/auth.php';
 require_auth();
-require_once __DIR__ . '/../../includes/db.php';
-require_once __DIR__ . '/../../includes/helpers.php';
+require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/helpers.php';
 
 ensure_admins_table($pdo);
 ensure_table_columns($pdo, 'admins', [
@@ -56,7 +56,7 @@ $pageTitle = 'CV Management';
 $pageSubtitle = 'Manage your CV that appears on the homepage download button.';
 $activeNav = 'overview';
 $topbarActionsHtml = '<a class="btn btn-secondary btn-sm" href="/admin/dashboard.php">' . admin_icon_html('chevron') . '<span>Back to Dashboard</span></a>';
-require __DIR__ . '/../../includes/admin/layout_top.php';
+require __DIR__ . '/../includes/admin/layout_top.php';
 ?>
 
   <?php if ($success !== ''): ?><div class="notice notice-success"><?php echo admin_icon_html('check'); ?><span><?php echo esc($success); ?></span></div><?php endif; ?>
@@ -152,4 +152,4 @@ require __DIR__ . '/../../includes/admin/layout_top.php';
     </div>
   </section>
 
-<?php require __DIR__ . '/../../includes/admin/layout_bottom.php'; ?>
+<?php require __DIR__ . '/../includes/admin/layout_bottom.php'; ?>
