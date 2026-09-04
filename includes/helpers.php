@@ -33,7 +33,10 @@ function youtube_embed_url($url){
 /* CSRF helpers */
 function ensure_session(){
     if(session_status() !== PHP_SESSION_ACTIVE){
-        session_start();
+        // Suppress session warnings and handle errors gracefully
+        error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE);
+        @session_start();
+        error_reporting(E_ALL);
     }
 }
 

@@ -2,6 +2,9 @@
 // Authentication helpers using PHP sessions and the `admins` table.
 // Harden session cookie settings before starting session
 if(session_status() !== PHP_SESSION_ACTIVE){
+  // Suppress session warnings and handle errors gracefully
+  error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE);
+  
   $secure = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || (isset($_SERVER['SERVER_PORT']) && (int)$_SERVER['SERVER_PORT'] === 443);
   $cookieParams = session_get_cookie_params();
   session_set_cookie_params([
@@ -12,7 +15,11 @@ if(session_status() !== PHP_SESSION_ACTIVE){
     'httponly' => true,
     'samesite' => 'Lax',
   ]);
-  session_start();
+  
+  @session_start();
+  
+  // Restore error reporting
+  error_reporting(E_ALL);
 }
 
 require_once __DIR__ . '/db.php';

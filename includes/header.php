@@ -1,4 +1,15 @@
 <?php
+// Disable error display for production, enable error logging
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+error_reporting(E_ALL);
+
+// Custom error handler to log errors without displaying them
+set_error_handler(function($errno, $errstr, $errfile, $errline) {
+    error_log("[$errno] $errstr in $errfile on line $errline");
+    return true; // Don't display errors
+});
+
 // Load helpers and ensure session starts before any output
 include_once __DIR__ . '/helpers.php';
 if(function_exists('ensure_session')){
