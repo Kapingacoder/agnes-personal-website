@@ -103,7 +103,7 @@ require __DIR__ . '/../../includes/admin/layout_top.php';
               </div>
             </div>
             <div class="listing-controls">
-              <a class="btn btn-secondary btn-sm" href="/admin/consultancy/add.php"><?php echo admin_icon_html('edit'); ?><span>Edit</span></a>
+              <a class="btn btn-secondary btn-sm" href="/admin/consultancy/edit.php?id=<?php echo (int)$item['id']; ?>"><?php echo admin_icon_html('edit'); ?><span>Edit</span></a>
               <form method="post" action="/admin/consultancy/delete.php" onsubmit="return confirm('Delete this consultancy item?');">
                 <input type="hidden" name="id" value="<?php echo (int)$item['id']; ?>">
                 <button class="btn btn-danger-ghost btn-sm btn-block" type="submit"><?php echo admin_icon_html('delete'); ?><span>Delete</span></button>
