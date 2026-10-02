@@ -24,6 +24,7 @@ $adminNavItems = [
     'publications' => ['label' => 'Publications', 'href' => '/admin/publications/index.php', 'icon' => 'publications'],
     'projects' => ['label' => 'Projects', 'href' => '/admin/projects/index.php', 'icon' => 'publications'],
     'consultancy' => ['label' => 'Consultancy', 'href' => '/admin/consultancy/index.php', 'icon' => 'consultancy'],
+    'social_life' => ['label' => 'Social Life',  'href' => '/admin/social_life/index.php',  'icon' => 'image'],
     'messages' => ['label' => 'Messages', 'href' => '/admin/index.php', 'icon' => 'messages'],
     'settings' => ['label' => 'Settings', 'href' => '/admin/change-password.php', 'icon' => 'shield'],
     'cv' => ['label' => 'CV Management', 'href' => '/admin/cv.php', 'icon' => 'external'],

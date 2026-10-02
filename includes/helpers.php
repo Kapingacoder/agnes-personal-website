@@ -392,6 +392,7 @@ function admin_icon(string $name): string {
         'stats' => '<path d="M4 20V10M11 20V4M18 20v-7"/>',
         'search' => '<circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.4-4.4"/>',
         'shield' => '<path d="M12 3.2 4.5 6v6c0 5 3.4 7.9 7.5 9 4.1-1.1 7.5-4 7.5-9V6L12 3.2Z"/>',
+        'image'  => '<rect x="3" y="3" width="18" height="18" rx="2.5"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m3 15 5-5 4 4 3-3 6 6"/>',
     ];
 
     if (!isset($body[$name])) {
@@ -427,4 +428,56 @@ function format_display_date($value): string {
     }
 
     return date('F j, Y', $timestamp);
+}
+
+
+/**
+ * Extract the raw YouTube video ID from any YouTube URL.
+ * Returns the 11-char ID string or empty string if not found.
+ */
+function youtube_video_id(?string $url): string {
+    if (!$url) return '';
+    $patterns = [
+        '/youtube\.com\/shorts\/([\w-]{11})/',
+        '/youtu\.be\/([\w-]{11})/',
+        '/v=([\w-]{11})/',
+        '/embed\/([\w-]{11})/',
+        '/watch\?v=([\w-]{11})/',
+    ];
+    foreach ($patterns as $p) {
+        if (preg_match($p, $url, $m)) {
+            return $m[1];
+        }
+    }
+    return '';
+}
+
+/**
+ * Create the social_life table if it does not exist.
+ * Also ensures all required columns are present via ensure_table_columns().
+ */
+function ensure_social_life_table(PDO $pdo): void {
+    try {
+        $pdo->exec("CREATE TABLE IF NOT EXISTS social_life (
+            id          INT AUTO_INCREMENT PRIMARY KEY,
+            title       VARCHAR(500)  DEFAULT NULL,
+            caption     TEXT          DEFAULT NULL,
+            media_type  VARCHAR(20)   NOT NULL DEFAULT 'youtube',
+            youtube_url VARCHAR(1000) DEFAULT NULL,
+            image_file  VARCHAR(500)  DEFAULT NULL,
+            created_at  TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at  TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+    } catch (Throwable $e) {
+        // Table may already exist or driver differs — ensure columns below will handle it
+        error_log('ensure_social_life_table: ' . $e->getMessage());
+    }
+
+    ensure_table_columns($pdo, 'social_life', [
+        'title'       => 'VARCHAR(500) DEFAULT NULL',
+        'caption'     => 'TEXT',
+        'media_type'  => "VARCHAR(20) NOT NULL DEFAULT 'youtube'",
+        'youtube_url' => 'VARCHAR(1000) DEFAULT NULL',
+        'image_file'  => 'VARCHAR(500) DEFAULT NULL',
+    ]);
 }

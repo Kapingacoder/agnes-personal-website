@@ -880,3 +880,27 @@ html,body{margin:0;padding:0}
 	.detail-panel{padding:18px}
 	.detail-actions .btn-danger-ghost{margin-left:0}
 }
+
+/* ── Social Life: media-type toggle in add/edit forms ── */
+.media-type-toggle{display:flex;gap:12px;flex-wrap:wrap;margin-top:4px}
+.media-type-option{display:flex;align-items:center;gap:0;cursor:pointer}
+.media-type-option input[type="radio"]{display:none}
+.media-type-option span{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 20px;
+  border-radius:12px;
+  border:1.5px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.04);
+  color:#8ea5b5;
+  font-size:.88rem;font-weight:500;
+  transition:background .2s,border-color .2s,color .2s;
+  cursor:pointer;
+}
+.media-type-option span svg{width:16px;height:16px;opacity:.7;transition:opacity .2s}
+.media-type-option input[type="radio"]:checked + span{
+  background:rgba(76,201,240,.12);
+  border-color:rgba(76,201,240,.45);
+  color:#4cc9f0;
+}
+.media-type-option input[type="radio"]:checked + span svg{opacity:1}
+.media-type-option span:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:#dce8ff}

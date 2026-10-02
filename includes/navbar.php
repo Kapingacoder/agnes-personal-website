@@ -21,6 +21,7 @@ if (strpos($currentPath, '/admin') === 0) {
         <li><a href="/pages/research.php">Research &amp; Publications</a></li>
         <li><a href="/pages/projects.php">Projects</a></li>
         <li><a href="/pages/consultancy.php">Consultancy</a></li>
+        <li><a href="/pages/social_life.php">Social Life</a></li>
         <li><a href="/pages/contact.php">Contact</a></li>
       </ul>
     </nav>
@@ -39,6 +40,7 @@ if (strpos($currentPath, '/admin') === 0) {
       <li><a href="/pages/research.php">Research &amp; Publications</a></li>
       <li><a href="/pages/projects.php">Projects</a></li>
       <li><a href="/pages/consultancy.php">Consultancy</a></li>
+      <li><a href="/pages/social_life.php">Social Life</a></li>
       <li><a href="/pages/contact.php">Contact</a></li>
     </ul>
   </nav>
