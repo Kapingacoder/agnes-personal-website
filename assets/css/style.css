@@ -1289,8 +1289,8 @@ table{width:100%;max-width:100%;border-collapse:collapse}
   top:12px;right:12px;
   background:rgba(10,10,20,.72);
   border:1px solid rgba(255,255,255,.14);
-  backdrop-filter:blur(8px);
   -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(8px);
   color:#dce8ff;
   font-size:.65rem;
   font-weight:600;
