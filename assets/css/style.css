@@ -1198,7 +1198,7 @@ table{width:100%;max-width:100%;border-collapse:collapse}
   display:block;
   position:relative;
   border-radius:24px;
-  overflow:hidden;
+  overflow:visible;
   background:rgba(255,255,255,.045);
   border:1px solid rgba(255,255,255,.08);
   transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
@@ -1209,6 +1209,13 @@ table{width:100%;max-width:100%;border-collapse:collapse}
   transform:translateY(-5px);
   box-shadow:0 28px 56px rgba(0,0,0,.5);
   border-color:rgba(167,139,250,.35);
+}
+
+/* Clip media inside card, not the whole card (so button stays visible) */
+.sl-card__media--photo,
+.sl-card__media--video{
+  border-radius:24px 24px 0 0;
+  overflow:hidden;
 }
 
 /* Photo card — image fills the card */
@@ -1304,25 +1311,26 @@ table{width:100%;max-width:100%;border-collapse:collapse}
 .sl-fullscreen-btn{
   position:absolute;
   bottom:12px;right:12px;
-  width:36px;height:36px;
+  width:40px;height:40px;
   display:flex;align-items:center;justify-content:center;
-  background:rgba(10,10,20,.72);
-  border:1px solid rgba(255,255,255,.18);
+  background:rgba(10,10,20,.75);
+  border:1px solid rgba(255,255,255,.22);
   -webkit-backdrop-filter:blur(8px);
   backdrop-filter:blur(8px);
   border-radius:10px;
-  color:#dce8ff;
+  color:#fff;
   cursor:pointer;
   opacity:0;
   transform:scale(.85);
   transition:opacity .2s ease,transform .2s ease,background .2s ease,border-color .2s ease;
-  z-index:3;
+  z-index:10;
+  pointer-events:auto;
 }
 .sl-fullscreen-btn svg{width:18px;height:18px;pointer-events:none}
 .sl-card:hover .sl-fullscreen-btn{opacity:1;transform:scale(1)}
-.sl-fullscreen-btn:hover{background:rgba(167,139,250,.35);border-color:rgba(167,139,250,.6);color:#fff}
-/* Always visible on mobile (no hover) */
-@media(max-width:600px){
+.sl-fullscreen-btn:hover{background:rgba(167,139,250,.5);border-color:rgba(167,139,250,.7);color:#fff;transform:scale(1.08) !important}
+/* Always visible on touch/mobile */
+@media(hover:none),(max-width:600px){
   .sl-fullscreen-btn{opacity:1;transform:scale(1)}
 }
 

@@ -49,17 +49,17 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     title="<?php echo esc($post['title'] ?? 'Video'); ?>"
                   ></iframe>
                 </div>
-                <!-- Fullscreen button for video -->
-                <button
-                  class="sl-fullscreen-btn"
-                  aria-label="View fullscreen"
-                  data-type="video"
-                  data-videoid="<?php echo esc($videoId); ?>"
-                  data-title="<?php echo esc($post['title'] ?? ''); ?>"
-                >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
-                </button>
               </div>
+              <!-- Fullscreen button OUTSIDE media wrap to avoid overflow:hidden clipping -->
+              <button
+                class="sl-fullscreen-btn"
+                aria-label="View fullscreen"
+                data-type="video"
+                data-videoid="<?php echo esc($videoId); ?>"
+                data-title="<?php echo esc($post['title'] ?? ''); ?>"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+              </button>
             <?php elseif ($isImage && has_text($post['image_file'])): ?>
               <div class="sl-card__media sl-card__media--photo">
                 <img
@@ -67,18 +67,18 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                   alt="<?php echo esc($post['title'] ?? 'Social life photo'); ?>"
                   loading="lazy"
                 >
-                <!-- Fullscreen button for photo -->
-                <button
-                  class="sl-fullscreen-btn"
-                  aria-label="View fullscreen"
-                  data-type="image"
-                  data-src="<?php echo esc($post['image_file']); ?>"
-                  data-title="<?php echo esc($post['title'] ?? ''); ?>"
-                  data-caption="<?php echo esc($post['caption'] ?? ''); ?>"
-                >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
-                </button>
               </div>
+              <!-- Fullscreen button OUTSIDE media wrap to avoid overflow:hidden clipping -->
+              <button
+                class="sl-fullscreen-btn"
+                aria-label="View fullscreen"
+                data-type="image"
+                data-src="<?php echo esc($post['image_file']); ?>"
+                data-title="<?php echo esc($post['title'] ?? ''); ?>"
+                data-caption="<?php echo esc($post['caption'] ?? ''); ?>"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+              </button>
             <?php endif; ?>
 
             <!-- Caption / title overlay -->
