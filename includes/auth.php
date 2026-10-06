@@ -63,8 +63,8 @@ function logout_user(){
   session_destroy();
 }
 
-// Optional check for session timeout
-function session_is_expired($timeout = 1800){
+// Optional check for session timeout (10 minutes)
+function session_is_expired($timeout = 600){
     if(empty($_SESSION['last_activity'])) return false;
     return (time() - $_SESSION['last_activity']) > $timeout;
 }
