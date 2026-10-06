@@ -12,9 +12,10 @@ ensure_table_columns($pdo, 'consultancy_videos', [
     'video_file' => 'TEXT',
     'resource_file_name' => 'TEXT',
     'supporting_file_name' => 'TEXT',
+    'youtube_image_url' => 'VARCHAR(1000) DEFAULT NULL',
 ]);
 
-$stmt = $pdo->prepare('SELECT id, title, description, youtube_url, thumbnail, caption, date, resource_file, supporting_file, video_file, resource_file_name, supporting_file_name FROM consultancy_videos ORDER BY date DESC, created_at DESC');
+$stmt = $pdo->prepare('SELECT id, title, description, youtube_url, thumbnail, caption, date, resource_file, supporting_file, video_file, resource_file_name, supporting_file_name, youtube_image_url FROM consultancy_videos ORDER BY date DESC, created_at DESC');
 $stmt->execute();
 $videos = $stmt->fetchAll();
 ?>
@@ -41,6 +42,12 @@ $videos = $stmt->fetchAll();
             $displayDate = format_display_date($v['date']);
             $embed = youtube_embed_url($v['youtube_url']);
             $hasLocalVideo = has_text($v['video_file'] ?? null);
+            // YouTube image URL: use as thumbnail if no uploaded thumbnail
+            $ytImageId = youtube_video_id($v['youtube_image_url'] ?? '');
+            $ytImageThumb = $ytImageId ? 'https://img.youtube.com/vi/' . $ytImageId . '/hqdefault.jpg' : '';
+            // Resolve effective thumbnail: uploaded > youtube image
+            $effectiveThumbnail = $hasThumbnail ? $v['thumbnail'] : ($ytImageThumb ?: '');
+            $hasAnyThumbnail = $effectiveThumbnail !== '';
             $resources = [];
             foreach (['resource_file' => 'resource_file_name', 'supporting_file' => 'supporting_file_name'] as $resourceKey => $nameKey) {
                 if (has_text($v[$resourceKey] ?? null)) {
@@ -79,14 +86,14 @@ $videos = $stmt->fetchAll();
                         Your browser does not support the video tag.
                       </video>
                     </div>
-                  <?php elseif ($hasThumbnail): ?>
+                  <?php elseif ($hasAnyThumbnail): ?>
                     <div class="content-card__media consultancy-card__media">
-                      <img src="<?php echo esc($v['thumbnail']); ?>" alt="<?php echo esc($v['title']); ?>">
+                      <img src="<?php echo esc($effectiveThumbnail); ?>" alt="<?php echo esc($v['title']); ?>">
                     </div>
                   <?php endif; ?>
 
-                  <?php if (!$embed && !$hasLocalVideo && $hasThumbnail): ?>
-                    <div class="consultancy-image-note">Media preview</div>
+                  <?php if (!$embed && !$hasLocalVideo && $hasAnyThumbnail): ?>
+                    <div class="consultancy-image-note">Media preview<?php echo $ytImageThumb ? ' (YouTube thumbnail)' : ''; ?></div>
                   <?php endif; ?>
                 </div>
               <?php endif; ?>

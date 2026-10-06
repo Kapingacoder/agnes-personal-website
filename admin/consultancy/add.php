@@ -12,6 +12,7 @@ ensure_table_columns($pdo, 'consultancy_videos', [
     'video_file' => 'TEXT',
     'resource_file_name' => 'TEXT',
     'supporting_file_name' => 'TEXT',
+    'youtube_image_url' => 'VARCHAR(1000) DEFAULT NULL',
 ]);
 
 $success = '';
@@ -23,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && post_exceeds_size_limit()) {
     $title = trim((string)($_POST['title'] ?? ''));
     $description = trim((string)($_POST['description'] ?? ''));
     $youtube_url = trim((string)($_POST['youtube_url'] ?? ''));
+    $youtube_image_url = trim((string)($_POST['youtube_image_url'] ?? ''));
     $caption = trim((string)($_POST['caption'] ?? ''));
     $date = trim((string)($_POST['date'] ?? ''));
 
@@ -35,6 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && post_exceeds_size_limit()) {
 
     if ($title === '') {
         $error = 'Please provide a title for the consultancy item.';
+    } elseif ($youtube_image_url !== '' && !youtube_embed_url($youtube_image_url)) {
+        $error = 'The YouTube image URL is not valid. Please use a standard youtube.com or youtu.be link.';
     } else {
         $thumb = $_FILES['thumbnail'] ?? null;
         if (!empty($thumb['name'])) {
@@ -92,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && post_exceeds_size_limit()) {
 
         if ($error === '') {
             try {
-                $stmt = $pdo->prepare('INSERT INTO consultancy_videos (title, description, youtube_url, thumbnail, caption, date, resource_file, supporting_file, video_file, resource_file_name, supporting_file_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+                $stmt = $pdo->prepare('INSERT INTO consultancy_videos (title, description, youtube_url, thumbnail, caption, date, resource_file, supporting_file, video_file, resource_file_name, supporting_file_name, youtube_image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
                 $stmt->execute([
                     $title,
                     $description !== '' ? $description : null,
@@ -105,6 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && post_exceeds_size_limit()) {
                     $videoFilePath !== '' ? $videoFilePath : null,
                     $resourceFileName !== '' ? $resourceFileName : null,
                     $supportingFileName !== '' ? $supportingFileName : null,
+                    $youtube_image_url !== '' ? $youtube_image_url : null,
                 ]);
                 $success = 'Consultancy content added successfully.';
                 $_POST = [];
@@ -146,6 +151,12 @@ require __DIR__ . '/../../includes/admin/layout_top.php';
         <div class="field">
           <label for="youtube_url">YouTube URL <span class="hint-badge">Optional</span></label>
           <input id="youtube_url" type="url" name="youtube_url" value="<?php echo esc($_POST['youtube_url'] ?? ''); ?>">
+        </div>
+
+        <div class="field">
+          <label for="youtube_image_url"><?php echo admin_icon_html('image'); ?> YouTube Image URL <span class="hint-badge">Optional</span></label>
+          <input id="youtube_image_url" type="url" name="youtube_image_url" value="<?php echo esc($_POST['youtube_image_url'] ?? ''); ?>" placeholder="https://www.youtube.com/watch?v=...">
+          <span class="field__hint">Paste a YouTube link — its thumbnail will be used as the cover image on the public page (saves server storage).</span>
         </div>
 
         <div class="field field--full">

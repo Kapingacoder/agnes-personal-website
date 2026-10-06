@@ -12,9 +12,10 @@ ensure_table_columns($pdo, 'lecturers', [
     'video_file' => 'TEXT',
     'primary_file_name' => 'TEXT',
     'secondary_file_name' => 'TEXT',
+    'youtube_url' => 'VARCHAR(1000) DEFAULT NULL',
 ]);
 
-$stmt = $pdo->prepare('SELECT id, title, description, image, caption, date, primary_file, secondary_file, video_file, primary_file_name, secondary_file_name FROM lecturers ORDER BY date DESC, created_at DESC');
+$stmt = $pdo->prepare('SELECT id, title, description, image, caption, date, primary_file, secondary_file, video_file, primary_file_name, secondary_file_name, youtube_url FROM lecturers ORDER BY date DESC, created_at DESC');
 $stmt->execute();
 $lecturers = $stmt->fetchAll();
 ?>
@@ -39,6 +40,7 @@ $lecturers = $stmt->fetchAll();
             $hasImage = has_text($l['image']);
             $hasDescription = has_text($l['description']);
             $displayDate = format_display_date($l['date']);
+            $youtubeEmbed = youtube_embed_url($l['youtube_url'] ?? '');
             $resources = [];
             foreach (['primary_file' => 'primary_file_name', 'secondary_file' => 'secondary_file_name'] as $resourceKey => $nameKey) {
                 if (has_text($l[$resourceKey] ?? null)) {
@@ -51,7 +53,7 @@ $lecturers = $stmt->fetchAll();
                 }
             }
             $hasVideoFile = has_text($l['video_file'] ?? null);
-            $hasCaption = ($hasImage || $hasVideoFile || !empty($resources)) && has_text($l['caption']);
+            $hasCaption = ($hasImage || $hasVideoFile || $youtubeEmbed || !empty($resources)) && has_text($l['caption']);
           ?>
           <article class="content-card lecturer-card<?php echo $hasImage ? ' has-media' : ' no-media'; ?>">
             <?php if ($hasImage): ?>
@@ -86,6 +88,19 @@ $lecturers = $stmt->fetchAll();
                       Your browser does not support the video tag.
                     </video>
                   </div>
+                </div>
+              <?php endif; ?>
+
+              <?php if ($youtubeEmbed): ?>
+                <div class="content-card__embed video-responsive">
+                  <iframe
+                    src="<?php echo esc($youtubeEmbed); ?>"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    loading="lazy"
+                    title="<?php echo esc($l['title']); ?>"
+                  ></iframe>
                 </div>
               <?php endif; ?>
 
