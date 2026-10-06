@@ -179,7 +179,7 @@ require __DIR__ . '/../../includes/admin/layout_top.php';
         </div>
 
         <div class="field">
-          <label for="youtube_image_url"><?php echo admin_icon_html('image'); ?> YouTube Image URL <span class="hint-badge">Optional</span></label>
+          <label for="youtube_image_url">YouTube Image URL <span class="hint-badge">Optional</span></label>
           <input id="youtube_image_url" type="url" name="youtube_image_url" value="<?php echo esc($record['youtube_image_url'] ?? ''); ?>" placeholder="https://www.youtube.com/watch?v=...">
           <span class="field__hint">Paste a YouTube link — its thumbnail will be used as the cover image (saves server storage). Leave blank to use an uploaded thumbnail instead.</span>
         </div>

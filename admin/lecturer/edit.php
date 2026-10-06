@@ -154,7 +154,7 @@ require __DIR__ . '/../../includes/admin/layout_top.php';
 
         <!-- YouTube URL -->
         <div class="field field--full">
-          <label for="youtube_url"><?php echo admin_icon_html('view'); ?> YouTube Video URL <span class="hint-badge">Optional</span></label>
+          <label for="youtube_url">YouTube Video URL <span class="hint-badge">Optional</span></label>
           <input id="youtube_url" name="youtube_url" type="url" value="<?php echo esc($record['youtube_url'] ?? ''); ?>" placeholder="https://www.youtube.com/watch?v=... or https://youtu.be/...">
           <span class="field__hint">Paste a YouTube link — the video will be embedded on the public Lecturer page.</span>
         </div>
